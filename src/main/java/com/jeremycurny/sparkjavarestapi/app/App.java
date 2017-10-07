@@ -15,7 +15,7 @@ public class App {
 
 		UserController userController = new UserController();
 
-		port(5031);
+		port(3000);
 
 		before((req, res) -> {
 			res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
@@ -31,6 +31,5 @@ public class App {
 			res.status(500);
 			res.body(message);
 		});
-
 	}
 }

@@ -1,47 +1,44 @@
 package com.jeremycurny.sparkjavarestapi.util;
 
+import org.json.simple.JSONObject;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class Point {
-        public Integer _x;
-        public Integer _y;
+    public Integer x;
+    public Integer y;
 
-        public Integer getX() {
-            return _x;
-        }
+    public Point() {}
 
-        public Integer getY() {
-            return _y;
-        }
-
-        public Point(Integer x, Integer y) {
-            _x = x;
-            _y = y;
-        }
-
-        public Point add(Point point) {
-
-            return new Point(point.getX() + getX(), point.getY() + getY());
-
-        }
-
-        public Point sub(Point point) {
-
-            return new Point(getX() - point.getX(), getY() - point.getY());
-        }
-
-        public Double distance(Point p1, Point p2)
-        {
-
-            return sqrt(pow(p1.getX() - p2.getX(),2) + pow(p1.getY() - p2.getY(), 2));
-        }
-
-        public String toString()
-        {
-            return "{{" + getX().toString() + ", " + getY().toString() + "}}";
-        }
-
-
+    public Point(Integer x, Integer y) {
+        x = x;
+        y = y;
     }
+
+    public Point add(Point point) {
+        return new Point(point.x + x, point.y + y);
+    }
+
+    public Point sub(Point point) {
+        return new Point(x - point.x, y - point.y);
+    }
+
+    public Double distance(Point p1, Point p2) {
+        return sqrt(pow(p1.x - p2.x,2) + pow(p1.y - p2.y, 2));
+    }
+
+    public String toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("X", x);
+        obj.put("Y", y);
+
+        return obj.toJSONString();
+    }
+
+    public void fromJson(JSONObject point) {
+        x = Integer.valueOf(point.get("X").toString());
+        y = Integer.valueOf(point.get("Y").toString());
+    }
+}
